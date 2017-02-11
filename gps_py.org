@@ -1,0 +1,6 @@
+#+Title: General Problem Solver in Python
+* Introduction
+This is a 'port' of Norvig's General Problem Solver from Norvig's Common Lisp code to my own Python. While my intent with the exercise includes learning a bit more Python, the big goal is to ensure a better understanding of the General Problem Solver. Just as typing in code from a book creates deeper understanding than mere reading, I suspect that rewriting a program in a second language increases the understanding even more so...yeah, it's a theory.
+
+** So why Python? 
+Practically speaking, rewriting GPS in another Lisp smells less of an intellectual exercise. On the other hand, Norvig's handy [[http://norvig.com/python-lisp.html][/Python for Lisp Programmers/]] means there's an external basis for rewriting in Python and some signposts on how to proceed.
