@@ -1,6 +1,20 @@
 #+Title: General Problem Solver in Python
+*** Preface: Python is not Pythonic
+Python was perhaps the first 'new' language I read about after I discovered Hacker News. I had great expectations when I saw =spam= and =eggs=...I have the [[https://www.amazon.com/Complete-Pythons-Flying-Circus-Megaset/dp/B0009XRZ92][16 Tons]] (not an affiliate link). I saw /Holy Grail/ in the theater as a child. I thought 'this sounds like fun.' I expected something completely different.
+
+In case you're unfamiliar with Python the language, other than the half similarity of the language's name to the comedic troop's name and the use of =spam= for =foo= and =eggs= for =bar=,  there's really no relation in either spirit or philosophy. I won't say Python is committed to dishumor, but it doesn't seem to live up to the philosophy espoused in *Meaning of Life*...also seen in the theater as part of a tweener birthday party. Anyway, Python did not turn out to be the language of my soul.
+
+In the years since, I've found that I can't hate Python as much as I wish I could. I've also found I can't love it as much as I could. I can't hate it because it is easy to bang out certain types of programs. It's practical and it isn't JavaScript.
+
+But I take a deep philosophical dislike to the notion of Pythonic. Or rather the evil Pythonic enables: calling code and coders 'unpythonic' as a pejorative, and 'unpythonic' is always used as a pejorative by the Python community. It's corrosive. It enables bullying. It accomplishes nothing but an excuse for unproductive behavior. Two space indentation is unpythonic. Tabs are unpythonic. Whatever someone with more community standing does not like is unpythonic. How stupid is the notion of unpythonic? Well Python 2 is on the verge of becoming unpythonic. It's about [[https://web-beta.archive.org/web/20120922091721/http://learncodethehardway.org/blog/AUG_19_2012.html][social mores]], not programming idioms. 
+
+So there's that. Which means I am not particularly concerned if anyone considers my code unpythonic or if it is considered pythonic for the same reasons that I don't care what someone thinks of the =loop= macro's inclusion in Common Lisp. I care if the code works and if the program is readable (the latter is why I am using literate programming (I also don't care whether or not literate programming is pythonic either))...actually I am probably using literate programming so writing essays like this one count as programming.
+
+Anyway, it's great if you find the literate format entertaining or informative. If you don't, just skip this document and look at the code. It should have doc strings and at least a few comments.
+
+ 
 * Introduction
 This is a 'port' of Norvig's General Problem Solver from Norvig's Common Lisp code to my own Python. While my intent with the exercise includes learning a bit more Python, the big goal is to ensure a better understanding of the General Problem Solver. Just as typing in code from a book creates deeper understanding than mere reading, I suspect that rewriting a program in a second language increases the understanding even more so...yeah, it's a theory.
 
 ** So why Python? 
-Practically speaking, rewriting GPS in another Lisp smells less of an intellectual exercise. On the other hand, Norvig's handy [[http://norvig.com/python-lisp.html][/Python for Lisp Programmers/]] means there's an external basis for rewriting in Python and some signposts on how to proceed.
+Practically speaking, rewriting GPS in another Lisp (such as Clojure or Racket or Arc) smells a bit sour as an intellectual exercise. On the other hand, Norvig's handy [[http://norvig.com/python-lisp.html][/Python for Lisp Programmers/]] means there's an external basis for rewriting in Python and some signposts on how to proceed.
