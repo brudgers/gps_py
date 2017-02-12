@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-02-11 Sat 18:43 -->
+<!-- 2017-02-11 Sat 23:10 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>General Problem Solver in Python</title>
@@ -233,27 +233,58 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org21b6ba9">1. Introduction</a>
-<ul>
-<li><a href="#org4d3bdc6">1.1. So why Python?</a></li>
+<li><a href="#org9971ed6">0.0.1. Preface: Python is not Pythonic</a></li>
 </ul>
 </li>
 </ul>
+</li>
+<li><a href="#org1a329c4">1. Introduction</a>
+<ul>
+<li><a href="#orgac2e683">1.1. So why Python?</a></div>
+</div>
+<div id="outline-container-org9971ed6" class="outline-4">
+<h4 id="org9971ed6"><span class="section-number-4">0.0.1</span> Preface: Python is not Pythonic</h4>
+<div class="outline-text-4" id="text-0-0-1">
+<p>
+Python was perhaps the first 'new' language I read about after I discovered Hacker News. I had great expectations when I saw <code>spam</code> and <code>eggs</code>&#x2026;I have the <a href="https://www.amazon.com/Complete-Pythons-Flying-Circus-Megaset/dp/B0009XRZ92">16 Tons</a> (not an affiliate link). I saw <i>Holy Grail</i> in the theater as a child. I thought 'this sounds like fun.' I expected something completely different.
+</p>
+
+<p>
+In case you're unfamiliar with Python the language, other than the half similarity of the language's name to the comedic troop's name and the use of <code>spam</code> for <code>foo</code> and <code>eggs</code> for <code>bar</code>,  there's really no relation in either spirit or philosophy. I won't say Python is committed to dishumor, but it doesn't seem to live up to the philosophy espoused in <b>Meaning of Life</b>&#x2026;also seen in the theater as part of a tweener birthday party. Anyway, Python did not turn out to be the language of my soul.
+</p>
+
+<p>
+In the years since, I've found that I can't hate Python as much as I wish I could. I've also found I can't love it as much as I could. I can't hate it because it is easy to bang out certain types of programs. It's practical and it isn't JavaScript.
+</p>
+
+<p>
+But I take a deep philosophical dislike to the notion of Pythonic. Or rather the evil Pythonic enables: calling code and coders 'unpythonic' as a pejorative, and 'unpythonic' is always used as a pejorative by the Python community. It's corrosive. It enables bullying. It accomplishes nothing but an excuse for unproductive behavior. Two space indentation is unpythonic. Tabs are unpythonic. Whatever someone with more community standing does not like is unpythonic. How stupid is the notion of unpythonic? Well Python 2 is on the verge of becoming unpythonic. It's about <a href="https://web-beta.archive.org/web/20120922091721/http://learncodethehardway.org/blog/AUG_19_2012.html">social mores</a>, not programming idioms. 
+</p>
+
+<p>
+So there's that. Which means I am not particularly concerned if anyone considers my code unpythonic or if it is considered pythonic for the same reasons that I don't care what someone thinks of the <code>loop</code> macro's inclusion in Common Lisp. I care if the code works and if the program is readable (the latter is why I am using literate programming (I also don't care whether or not literate programming is pythonic either))&#x2026;actually I am probably using literate programming so writing essays like this one count as programming.
+</p>
+
+<p>
+Anyway, it's great if you find the literate format entertaining or informative. If you don't, just skip this document and look at the code. It should have doc strings and at least a few comments.
+</p>
 </div>
 </div>
-<div id="outline-container-org21b6ba9" class="outline-2">
-<h2 id="org21b6ba9"><span class="section-number-2">1</span> Introduction</h2>
+
+
+<div id="outline-container-org1a329c4" class="outline-2">
+<h2 id="org1a329c4"><span class="section-number-2">1</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This is a 'port' of Norvig's General Problem Solver from Norvig's Common Lisp code to my own Python. While my intent with the exercise includes learning a bit more Python, the big goal is to ensure a better understanding of the General Problem Solver. Just as typing in code from a book creates deeper understanding than mere reading, I suspect that rewriting a program in a second language increases the understanding even more so&#x2026;yeah, it's a theory.
 </p>
 </div>
 
-<div id="outline-container-org4d3bdc6" class="outline-3">
-<h3 id="org4d3bdc6"><span class="section-number-3">1.1</span> So why Python?</h3>
+<div id="outline-container-orgac2e683" class="outline-3">
+<h3 id="orgac2e683"><span class="section-number-3">1.1</span> So why Python?</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
-Practically speaking, rewriting GPS in another Lisp smells less of an intellectual exercise. On the other hand, Norvig's handy <a href="http://norvig.com/python-lisp.html"><i>Python for Lisp Programmers</i></a> means there's an external basis for rewriting in Python and some signposts on how to proceed.
+Practically speaking, rewriting GPS in another Lisp (such as Clojure or Racket or Arc) smells a bit sour as an intellectual exercise. On the other hand, Norvig's handy <a href="http://norvig.com/python-lisp.html"><i>Python for Lisp Programmers</i></a> means there's an external basis for rewriting in Python and some signposts on how to proceed.
 </p>
 </div>
 </div>
@@ -261,7 +292,7 @@ Practically speaking, rewriting GPS in another Lisp smells less of an intellectu
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: benrudgers</p>
-<p class="date">Created: 2017-02-11 Sat 18:43</p>
+<p class="date">Created: 2017-02-11 Sat 23:10</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
