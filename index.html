@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-02-12 Sun 18:05 -->
+<!-- 2017-02-12 Sun 20:23 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>General Problem Solver in Python</title>
@@ -233,27 +233,27 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org07fc332">0.0.1. Preface: Python is not Pythonic</a></li>
+<li><a href="#orgd9724c9">0.0.1. Preface: Python is not Pythonic</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org36430d9">1. Introduction</a>
+<li><a href="#org46e8b0e">1. Introduction</a>
 <ul>
-<li><a href="#orgb2b2c0b">1.1. So why Python?</a></li>
-<li><a href="#orge25702a">1.2. General Approach</a></li>
+<li><a href="#org10e20cd">1.1. So why Python?</a></li>
+<li><a href="#org5b9fad0">1.2. General Approach</a></li>
 </ul>
 </li>
-<li><a href="#org8e1b051">2. Debugger</a>
+<li><a href="#orgcfbda72">2. Debugger</a>
 <ul>
-<li><a href="#org3444743">2.1. dbg ids</a></li>
-<li><a href="#orgfec0af2">2.2. dbg</a></li>
-<li><a href="#orgfc90619">2.3. debug</a></li>
-<li><a href="#org7b7d18c">2.4. undebug</a></li>
-<li><a href="#org0a9ba52">2.5. debug indent</a></div>
+<li><a href="#org9087116">2.1. dbg ids</a></li>
+<li><a href="#orga5470b8">2.2. dbg</a></li>
+<li><a href="#org80689a8">2.3. debug</a></li>
+<li><a href="#orge0fa5ce">2.4. undebug</a></li>
+<li><a href="#org605ab91">2.5. debug indent</a></div>
 </div>
-<div id="outline-container-org07fc332" class="outline-4">
-<h4 id="org07fc332"><span class="section-number-4">0.0.1</span> Preface: Python is not Pythonic</h4>
+<div id="outline-container-orgd9724c9" class="outline-4">
+<h4 id="orgd9724c9"><span class="section-number-4">0.0.1</span> Preface: Python is not Pythonic</h4>
 <div class="outline-text-4" id="text-0-0-1">
 <p>
 Python was perhaps the first 'new' language I read about after I discovered Hacker News. I had great expectations when I saw <code>spam</code> and <code>eggs</code>&#x2026;I have the <a href="https://www.amazon.com/Complete-Pythons-Flying-Circus-Megaset/dp/B0009XRZ92">16 Tons</a> (not an affiliate link). I saw <i>Holy Grail</i> in the theater as a child. I thought 'this sounds like fun.' I expected something completely different.
@@ -282,16 +282,16 @@ Anyway, it's great if you find the literate format entertaining or informative. 
 </div>
 
 
-<div id="outline-container-org36430d9" class="outline-2">
-<h2 id="org36430d9"><span class="section-number-2">1</span> Introduction</h2>
+<div id="outline-container-org46e8b0e" class="outline-2">
+<h2 id="org46e8b0e"><span class="section-number-2">1</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This is a 'port' of Norvig's General Problem Solver from Norvig's Common Lisp code to my own Python. While my intent with the exercise includes learning a bit more Python, the big goal is to ensure a better understanding of the General Problem Solver. Just as typing in code from a book creates deeper understanding than mere reading, I suspect that rewriting a program in a second language increases the understanding even more so&#x2026;yeah, it's a theory.
 </p>
 </div>
 
-<div id="outline-container-orgb2b2c0b" class="outline-3">
-<h3 id="orgb2b2c0b"><span class="section-number-3">1.1</span> So why Python?</h3>
+<div id="outline-container-org10e20cd" class="outline-3">
+<h3 id="org10e20cd"><span class="section-number-3">1.1</span> So why Python?</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Practically speaking, rewriting GPS in another Lisp (such as Clojure or Racket or Arc) smells a bit sour as an intellectual exercise. On the other hand, Norvig's handy <a href="http://norvig.com/python-lisp.html"><i>Python for Lisp Programmers</i></a> means there's an external basis for rewriting in Python and some signposts on how to proceed.
@@ -299,8 +299,8 @@ Practically speaking, rewriting GPS in another Lisp (such as Clojure or Racket o
 </div>
 </div>
 
-<div id="outline-container-orge25702a" class="outline-3">
-<h3 id="orge25702a"><span class="section-number-3">1.2</span> General Approach</h3>
+<div id="outline-container-org5b9fad0" class="outline-3">
+<h3 id="org5b9fad0"><span class="section-number-3">1.2</span> General Approach</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 The primary goal is working code by porting the Common Lisp to Python. Isomorphism between the code bases may wind up being a stronger condiseration than idiomatic Python. There's always time for refactoring later. However, the code base will reflect Norvig's completed version of GPS rather than following the iterative process in his book.
@@ -309,15 +309,15 @@ The primary goal is working code by porting the Common Lisp to Python. Isomorphi
 </div>
 </div>
 
-<div id="outline-container-org8e1b051" class="outline-2">
-<h2 id="org8e1b051"><span class="section-number-2">2</span> Debugger</h2>
+<div id="outline-container-orgcfbda72" class="outline-2">
+<h2 id="orgcfbda72"><span class="section-number-2">2</span> Debugger</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 One of the fun parts of Norvig's approach is building something rather than searching for someone else's tool. The simple debugger he implements for GPS seems like a good place to start.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgb1cb882"># This file autogenerated from gps_py.org
+<pre class="src src-python" id="orgb8c7473"># This file autogenerated from gps_py.org
 
 &lt;&lt;dbg_ids&gt;&gt;
 
@@ -332,52 +332,52 @@ One of the fun parts of Norvig's approach is building something rather than sear
 </div>
 </div>
 
-<div id="outline-container-org3444743" class="outline-3">
-<h3 id="org3444743"><span class="section-number-3">2.1</span> dbg ids</h3>
+<div id="outline-container-org9087116" class="outline-3">
+<h3 id="org9087116"><span class="section-number-3">2.1</span> dbg ids</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 I used leading underscores to indicate there is something a bit special about the variable as an isomorphism to the asterisks in <code>*dbg-ids*</code> from Common Lisp.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgfbe4651"># Identifiers used by dbg.
+<pre class="src src-python" id="org542b2e9"># Identifiers used by dbg.
 _dbg_ids_ = []
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgfec0af2" class="outline-3">
-<h3 id="orgfec0af2"><span class="section-number-3">2.2</span> dbg</h3>
+<div id="outline-container-orga5470b8" class="outline-3">
+<h3 id="orga5470b8"><span class="section-number-3">2.2</span> dbg</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Uses <code>target</code> instead of 'id'. May need to import <code>sys</code> and <code>write</code> to a different stream.
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org4ad0708">def dbg (target, format_string, *args):
+<pre class="src src-python" id="org78c7afd">def dbg (target, format_string, *args):
     """Print debugging information if target has been specified"""
     if target in _dbg_ids_:
-        print("\n")
-        print(format_string.format(*args))
+        print(format_string.format(args))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgfc90619" class="outline-3">
-<h3 id="orgfc90619"><span class="section-number-3">2.3</span> debug</h3>
+<div id="outline-container-org80689a8" class="outline-3">
+<h3 id="org80689a8"><span class="section-number-3">2.3</span> debug</h3>
 <div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
-<pre class="src src-python" id="org55c0f12">def debug(*ids):
+<pre class="src src-python" id="org184084a">def debug(*ids):
     """Start dbg output the given ids."""
-    _dbg_ids_ = _dbg_ids_ + *ids
+    global _dbg_ids_
+    _dbg_ids_ = _dbg_ids_ + list(ids)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org7b7d18c" class="outline-3">
-<h3 id="org7b7d18c"><span class="section-number-3">2.4</span> undebug</h3>
+<div id="outline-container-orge0fa5ce" class="outline-3">
+<h3 id="orge0fa5ce"><span class="section-number-3">2.4</span> undebug</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Python does not have set semantics for lists so I had to make <code>list_diff</code>, or rather I made <code>list_diff</code> so that <code>undebug</code> would have the appropriate level of abstraction. It seems to me that incorporating a list comprehension within <code>undebug</code> sort of gets in the way of readability&#x2026;particularly because the list comprehension contains a negative statement.
@@ -387,15 +387,20 @@ Python does not have set semantics for lists so I had to make <code>list_diff</c
 I used <code>minuend</code> and <code>subtrahend</code> per <a href="https://en.wikipedia.org/wiki/Subtraction">Wikipedia</a>.
 </p>
 
+<p>
+Python requires the <code>global</code> keyword to perform the assignment to <code>_dbg_ids_</code> because the <code>=</code> operator makes the variable locally scoped.
+</p>
+
 <div class="org-src-container">
-<pre class="src src-python" id="org041d715">def list_diff(minuend, subtrahend):
+<pre class="src src-python" id="org0a2d19e">def list_diff(minuend, subtrahend):
     """Remove the elements of the subtrahend from the minuend."""
     return [val for val in minuend if val not in subtrahend]
 
 def undebug(*ids):
-    """Stop dbg on the *ids. If no *ids, stop all debugging"""
-    if *ids:
-        _dbg_ids_ = list_diff(_dbg_ids_, *ids)
+    """Stop dbg on the ids. If no ids, stop all debugging"""
+    global _dbg_ids_
+    if ids:
+        _dbg_ids_ = list_diff(_dbg_ids_, list(ids))
     else:
         _dbg_ids_ = []
 </pre>
@@ -403,17 +408,18 @@ def undebug(*ids):
 </div>
 </div>
 
-<div id="outline-container-org0a9ba52" class="outline-3">
-<h3 id="org0a9ba52"><span class="section-number-3">2.5</span> debug indent</h3>
+<div id="outline-container-org605ab91" class="outline-3">
+<h3 id="org605ab91"><span class="section-number-3">2.5</span> debug indent</h3>
 <div class="outline-text-3" id="text-2-5">
 <div class="org-src-container">
-<pre class="src src-python" id="orgc7eeaff">def dbg_indent (target, indent, format_string, *args):
+<pre class="src src-python" id="org30ba2e3">def dbg_indent (target, indent, format_string, *args):
     """Print indented debugging info if target has been specified"""
     if target in _dbg_ids_:
-        print("\n")
+        s = ""
         for i in range(indent):
-            print("    ")
-            print(format_string.format(*args))
+            s += "    "
+        s = s + format_string
+        print(s.format(args))
 </pre>
 </div>
 </div>
@@ -422,7 +428,7 @@ def undebug(*ids):
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: benrudgers</p>
-<p class="date">Created: 2017-02-12 Sun 18:05</p>
+<p class="date">Created: 2017-02-12 Sun 20:23</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

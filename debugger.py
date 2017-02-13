@@ -6,28 +6,30 @@ _dbg_ids_ = []
 def dbg (target, format_string, *args):
     """Print debugging information if target has been specified"""
     if target in _dbg_ids_:
-        print("\n")
-        print(format_string.format(*args))
+        print(format_string.format(args))
 
 def debug(*ids):
     """Start dbg output the given ids."""
-    _dbg_ids_ = _dbg_ids_ + *ids
+    global _dbg_ids_
+    _dbg_ids_ = _dbg_ids_ + list(ids)
 
 def list_diff(minuend, subtrahend):
     """Remove the elements of the subtrahend from the minuend."""
     return [val for val in minuend if val not in subtrahend]
 
 def undebug(*ids):
-    """Stop dbg on the *ids. If no *ids, stop all debugging"""
-    if *ids:
-        _dbg_ids_ = list_diff(_dbg_ids_, *ids)
+    """Stop dbg on the ids. If no ids, stop all debugging"""
+    global _dbg_ids_
+    if ids:
+        _dbg_ids_ = list_diff(_dbg_ids_, list(ids))
     else:
         _dbg_ids_ = []
 
 def dbg_indent (target, indent, format_string, *args):
     """Print indented debugging info if target has been specified"""
     if target in _dbg_ids_:
-        print("\n")
+        s = ""
         for i in range(indent):
-            print("    ")
-            print(format_string.format(*args))
+            s += "    "
+        s = s + format_string
+        print(s.format(args))
