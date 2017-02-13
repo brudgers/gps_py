@@ -23,3 +23,11 @@ def undebug(*ids):
         _dbg_ids_ = list_diff(_dbg_ids_, *ids)
     else:
         _dbg_ids_ = []
+
+def dbg_indent (target, indent, format_string, *args):
+    """Print indented debugging info if target has been specified"""
+    if target in _dbg_ids_:
+        print("\n")
+        for i in range(indent):
+            print("    ")
+            print(format_string.format(*args))

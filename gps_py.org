@@ -37,10 +37,10 @@ One of the fun parts of Norvig's approach is building something rather than sear
 
   <<undebug>>
 
-  <<dbg-indent>>
+  <<dbg_indent>>
 #+END_SRC
 
-** dbg_ids
+** dbg\_ids
 I used leading underscores to indicate there is something a bit special about the variable as an isomorphism to the asterisks in =*dbg-ids*= from Common Lisp.
 
 #+NAME: dbg_ids
@@ -87,7 +87,7 @@ I used =minuend= and =subtrahend= per [[https://en.wikipedia.org/wiki/Subtractio
           _dbg_ids_ = []
 #+END_SRC
 
-** debug_indent
+** debug\_indent
 #+NAME: dbg_indent
 #+BEGIN_SRC python
   def dbg_indent (target, indent, format_string, *args):
