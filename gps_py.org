@@ -105,3 +105,69 @@ Python requires the =global= keyword to perform the assignment to =_dbg_ids_= be
 
 
 
+* Utilities
+Since the first goal is to port code from Common Lisp it probably makes sense to have a some tools for handling lists in a familiar way. All of this can be refactored later.
+** cons
+Where to start but with =cons=. It's not that Python doesn't have the ability to add to lists, it's just that trying to translate from front to rear addition is probably not the best place to start.
+#+NAME: cons
+#+BEGIN_SRC python :session yes :results none
+  def cons (element, a_list):
+      """
+      Adds an elment to the *front* of a list.
+      """
+      a = [element]
+      a.extend(a_list)
+      return a
+#+END_SRC
+** first
+#+NAME: first
+#+BEGIN_SRC python :session :results output silent
+  def first(a_list):
+      """
+      Returns the first elment of a list.
+      Returns False if the list is empty.
+      """
+      if len(a_list)==0:
+          return False
+      else:
+          return a_list[0]
+#+END_SRC
+** rest
+#+NAME: rest
+#+BEGIN_SRC python :session :results output silent
+  def rest(a_list):
+      """
+      Returns a list minus its first elment.
+      Returns false if list is empty.
+      Returns the empty list if list has one element.
+      """
+      if len(a_list)==0:
+          return False
+      elif len(a_list)==1:
+          return []
+      else:
+          return a_list[1:]
+#+END_SRC
+** list_append
+Python has an =append= function that adds an element onto the end of a list. While the =+= operator will concatenate two lists, my quick and dirty testing indicates it cannot be passed directly to =reduce=.
+#+BEGIN_EXAMPLE
+  >>> reduce(+, [[1],[2],[3]])
+    File "<stdin>", line 1
+      reduce(+, [[1],[2],[3]])
+              ^
+  SyntaxError: invalid syntax
+#+END_EXAMPLE
+
+The call to =+= must be wrapped in a =lambda=.
+#+BEGIN_SRC python :results none
+  reduce(lambda x,y: x + y, [[1],[2],[3]])
+  # => [1, 2, 3]
+#+END_SRC
+This means that mapping an append operation starts to look like lambdas inside of lambdas and that smells to me like a breakdown of abstraction layers.
+#+NAME: list_append
+#+BEGIN_SRC python :session :results output silent
+  def list_append(list_1, list_2):
+      return list_1 + list_2
+#+END_SRC
+
+
