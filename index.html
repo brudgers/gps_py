@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-02-17 Fri 14:25 -->
+<!-- 2017-02-17 Fri 14:35 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>General Problem Solver in Python</title>
@@ -233,58 +233,58 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9585247">Introduction</a>
+<li><a href="#org09d6f9c">Introduction</a>
 <ul>
-<li><a href="#org515eb33">So why Python?</a></li>
-<li><a href="#org0aff5f7">General Approach</a></li>
+<li><a href="#orgb89f94c">So why Python?</a></li>
+<li><a href="#orgc4c90eb">General Approach</a></li>
 </ul>
 </li>
-<li><a href="#orgb7676ca">Debugger</a>
+<li><a href="#org07a961d">Debugger</a>
 <ul>
-<li><a href="#orge9d2521">dbg ids</a></li>
-<li><a href="#org69efdb8">dbg</a></li>
-<li><a href="#org1be83e0">debug</a></li>
-<li><a href="#org9527a9c">undebug</a></li>
-<li><a href="#orgacc2434">debug indent</a></li>
+<li><a href="#orgd801997">dbg ids</a></li>
+<li><a href="#orgff5df96">dbg</a></li>
+<li><a href="#org76f75fa">debug</a></li>
+<li><a href="#org921140a">undebug</a></li>
+<li><a href="#org1e7e975">debug indent</a></li>
 </ul>
 </li>
-<li><a href="#org5becbbf">Utilities</a>
+<li><a href="#orgbfe77b0">Utilities</a>
 <ul>
-<li><a href="#orgedd674e">cons</a></li>
-<li><a href="#orgc097f5a">first</a></li>
-<li><a href="#org2e801c9">rest</a></li>
-<li><a href="#orga0857fe">list_append</a></li>
+<li><a href="#org1d2395c">cons</a></li>
+<li><a href="#org6bf7b1c">first</a></li>
+<li><a href="#org9dd064c">rest</a></li>
+<li><a href="#orgcdc5bd5">list_append</a></li>
 </ul>
 </li>
-<li><a href="#org1f7f637">General Problem Solver</a>
+<li><a href="#org00aa6fb">General Problem Solver</a>
 <ul>
-<li><a href="#org0d5bb9f">Special Variables</a></li>
-<li><a href="#org2ec8926">Data Structure</a></li>
+<li><a href="#org39ae3e4">Special Variables</a></li>
+<li><a href="#orgc2f6882">Data Structure</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org9585247" class="outline-2">
-<h2 id="org9585247">Introduction</h2>
-<div class="outline-text-2" id="text-org9585247">
+<div id="outline-container-org09d6f9c" class="outline-2">
+<h2 id="org09d6f9c">Introduction</h2>
+<div class="outline-text-2" id="text-org09d6f9c">
 <p>
 This is a 'port' of Norvig's General Problem Solver from Norvig's Common Lisp code to my own Python. While my intent with the exercise includes learning a bit more Python, the big goal is to ensure a better understanding of the General Problem Solver. Just as typing in code from a book creates deeper understanding than mere reading, I suspect that rewriting a program in a second language increases the understanding even more so&#x2026;yeah, it's a theory.
 </p>
 </div>
 
-<div id="outline-container-org515eb33" class="outline-3">
-<h3 id="org515eb33">So why Python?</h3>
-<div class="outline-text-3" id="text-org515eb33">
+<div id="outline-container-orgb89f94c" class="outline-3">
+<h3 id="orgb89f94c">So why Python?</h3>
+<div class="outline-text-3" id="text-orgb89f94c">
 <p>
 Practically speaking, rewriting GPS in another Lisp (such as Clojure or Racket or Arc) smells a bit sour as an intellectual exercise. On the other hand, Norvig's handy <a href="http://norvig.com/python-lisp.html"><i>Python for Lisp Programmers</i></a> means there's an external basis for rewriting in Python and some signposts on how to proceed.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org0aff5f7" class="outline-3">
-<h3 id="org0aff5f7">General Approach</h3>
-<div class="outline-text-3" id="text-org0aff5f7">
+<div id="outline-container-orgc4c90eb" class="outline-3">
+<h3 id="orgc4c90eb">General Approach</h3>
+<div class="outline-text-3" id="text-orgc4c90eb">
 <p>
 The primary goal is working code by porting the Common Lisp to Python. Isomorphism between the code bases may wind up being a stronger condiseration than idiomatic Python. There's always time for refactoring later. However, the code base will reflect Norvig's completed version of GPS rather than following the iterative process in his book.
 </p>
@@ -292,15 +292,16 @@ The primary goal is working code by porting the Common Lisp to Python. Isomorphi
 </div>
 </div>
 
-<div id="outline-container-orgb7676ca" class="outline-2">
-<h2 id="orgb7676ca">Debugger</h2>
-<div class="outline-text-2" id="text-orgb7676ca">
+<div id="outline-container-org07a961d" class="outline-2">
+<h2 id="org07a961d">Debugger</h2>
+<div class="outline-text-2" id="text-org07a961d">
 <p>
 One of the fun parts of Norvig's approach is building something rather than searching for someone else's tool. The simple debugger he implements for GPS seems like a good place to start.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org4c26e2b"># This file autogenerated from gps_py.org
+<pre class="src src-python" id="org63377ee"># debugger.py
+# This file autogenerated from gps_py.org
 
 &lt;&lt;dbg_ids&gt;&gt;
 
@@ -315,29 +316,29 @@ One of the fun parts of Norvig's approach is building something rather than sear
 </div>
 </div>
 
-<div id="outline-container-orge9d2521" class="outline-3">
-<h3 id="orge9d2521">dbg ids</h3>
-<div class="outline-text-3" id="text-orge9d2521">
+<div id="outline-container-orgd801997" class="outline-3">
+<h3 id="orgd801997">dbg ids</h3>
+<div class="outline-text-3" id="text-orgd801997">
 <p>
 I used leading underscores to indicate there is something a bit special about the variable as an isomorphism to the asterisks in <code>*dbg-ids*</code> from Common Lisp.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org4f4190f"># Identifiers used by dbg.
+<pre class="src src-python" id="org32ed31e"># Identifiers used by dbg.
 _dbg_ids_ = []
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org69efdb8" class="outline-3">
-<h3 id="org69efdb8">dbg</h3>
-<div class="outline-text-3" id="text-org69efdb8">
+<div id="outline-container-orgff5df96" class="outline-3">
+<h3 id="orgff5df96">dbg</h3>
+<div class="outline-text-3" id="text-orgff5df96">
 <p>
 Uses <code>target</code> instead of 'id'. May need to import <code>sys</code> and <code>write</code> to a different stream.
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="orge6b346d">def dbg (target, format_string, *args):
+<pre class="src src-python" id="orgdd9c4d4">def dbg (target, format_string, *args):
     """Print debugging information if target has been specified"""
     if target in _dbg_ids_:
         print(format_string.format(args))
@@ -346,11 +347,11 @@ Uses <code>target</code> instead of 'id'. May need to import <code>sys</code> an
 </div>
 </div>
 
-<div id="outline-container-org1be83e0" class="outline-3">
-<h3 id="org1be83e0">debug</h3>
-<div class="outline-text-3" id="text-org1be83e0">
+<div id="outline-container-org76f75fa" class="outline-3">
+<h3 id="org76f75fa">debug</h3>
+<div class="outline-text-3" id="text-org76f75fa">
 <div class="org-src-container">
-<pre class="src src-python" id="orgb2462ca">def debug(*ids):
+<pre class="src src-python" id="org6c03a48">def debug(*ids):
     """Start dbg output the given ids."""
     global _dbg_ids_
     _dbg_ids_ = _dbg_ids_ + list(ids)
@@ -359,9 +360,9 @@ Uses <code>target</code> instead of 'id'. May need to import <code>sys</code> an
 </div>
 </div>
 
-<div id="outline-container-org9527a9c" class="outline-3">
-<h3 id="org9527a9c">undebug</h3>
-<div class="outline-text-3" id="text-org9527a9c">
+<div id="outline-container-org921140a" class="outline-3">
+<h3 id="org921140a">undebug</h3>
+<div class="outline-text-3" id="text-org921140a">
 <p>
 Python does not have set semantics for lists so I had to make <code>list_diff</code>, or rather I made <code>list_diff</code> so that <code>undebug</code> would have the appropriate level of abstraction. It seems to me that incorporating a list comprehension within <code>undebug</code> sort of gets in the way of readability&#x2026;particularly because the list comprehension contains a negative statement.
 </p>
@@ -375,7 +376,7 @@ Python requires the <code>global</code> keyword to perform the assignment to <co
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org08a9cfa">def list_diff(minuend, subtrahend):
+<pre class="src src-python" id="org88de9a8">def list_diff(minuend, subtrahend):
     """Remove the elements of the subtrahend from the minuend."""
     return [val for val in minuend if val not in subtrahend]
 
@@ -391,11 +392,11 @@ def undebug(*ids):
 </div>
 </div>
 
-<div id="outline-container-orgacc2434" class="outline-3">
-<h3 id="orgacc2434">debug indent</h3>
-<div class="outline-text-3" id="text-orgacc2434">
+<div id="outline-container-org1e7e975" class="outline-3">
+<h3 id="org1e7e975">debug indent</h3>
+<div class="outline-text-3" id="text-org1e7e975">
 <div class="org-src-container">
-<pre class="src src-python" id="org6729454">def dbg_indent (target, indent, format_string, *args):
+<pre class="src src-python" id="orgba1cb46">def dbg_indent (target, indent, format_string, *args):
     """Print indented debugging info if target has been specified"""
     if target in _dbg_ids_:
         s = ""
@@ -409,22 +410,21 @@ def undebug(*ids):
 </div>
 </div>
 
-
-<div id="outline-container-org5becbbf" class="outline-2">
-<h2 id="org5becbbf">Utilities</h2>
-<div class="outline-text-2" id="text-org5becbbf">
+<div id="outline-container-orgbfe77b0" class="outline-2">
+<h2 id="orgbfe77b0">Utilities</h2>
+<div class="outline-text-2" id="text-orgbfe77b0">
 <p>
 Since the first goal is to port code from Common Lisp it probably makes sense to have a some tools for handling lists in a familiar way. All of this can be refactored later.
 </p>
 </div>
-<div id="outline-container-orgedd674e" class="outline-3">
-<h3 id="orgedd674e">cons</h3>
-<div class="outline-text-3" id="text-orgedd674e">
+<div id="outline-container-org1d2395c" class="outline-3">
+<h3 id="org1d2395c">cons</h3>
+<div class="outline-text-3" id="text-org1d2395c">
 <p>
 Where to start but with <code>cons</code>. It's not that Python doesn't have the ability to add to lists, it's just that trying to translate from front to rear addition is probably not the best place to start.
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="orgc18a0b9">def cons (element, a_list):
+<pre class="src src-python" id="orgb1d53ed">def cons (element, a_list):
     """
     Adds an elment to the *front* of a list.
     """
@@ -435,11 +435,11 @@ Where to start but with <code>cons</code>. It's not that Python doesn't have the
 </div>
 </div>
 </div>
-<div id="outline-container-orgc097f5a" class="outline-3">
-<h3 id="orgc097f5a">first</h3>
-<div class="outline-text-3" id="text-orgc097f5a">
+<div id="outline-container-org6bf7b1c" class="outline-3">
+<h3 id="org6bf7b1c">first</h3>
+<div class="outline-text-3" id="text-org6bf7b1c">
 <div class="org-src-container">
-<pre class="src src-python" id="org5646177">def first(a_list):
+<pre class="src src-python" id="org4e38d49">def first(a_list):
     """
     Returns the first elment of a list.
     Returns False if the list is empty.
@@ -452,11 +452,11 @@ Where to start but with <code>cons</code>. It's not that Python doesn't have the
 </div>
 </div>
 </div>
-<div id="outline-container-org2e801c9" class="outline-3">
-<h3 id="org2e801c9">rest</h3>
-<div class="outline-text-3" id="text-org2e801c9">
+<div id="outline-container-org9dd064c" class="outline-3">
+<h3 id="org9dd064c">rest</h3>
+<div class="outline-text-3" id="text-org9dd064c">
 <div class="org-src-container">
-<pre class="src src-python" id="org5fce81d">def rest(a_list):
+<pre class="src src-python" id="org289d1ca">def rest(a_list):
     """
     Returns a list minus its first elment.
     Returns false if list is empty.
@@ -472,13 +472,14 @@ Where to start but with <code>cons</code>. It's not that Python doesn't have the
 </div>
 </div>
 </div>
-<div id="outline-container-orga0857fe" class="outline-3">
-<h3 id="orga0857fe">list_append</h3>
-<div class="outline-text-3" id="text-orga0857fe">
+<div id="outline-container-orgcdc5bd5" class="outline-3">
+<h3 id="orgcdc5bd5">list_append</h3>
+<div class="outline-text-3" id="text-orgcdc5bd5">
 <p>
 Python has an <code>append</code> function that adds an element onto the end of a list. While the <code>+</code> operator will concatenate two lists, my quick and dirty testing indicates it cannot be passed directly to <code>reduce</code>.
 </p>
 <pre class="example">
+# Example
 &gt;&gt;&gt; reduce(+, [[1],[2],[3]])
   File "&lt;stdin&gt;", line 1
     reduce(+, [[1],[2],[3]])
@@ -487,32 +488,37 @@ SyntaxError: invalid syntax
 </pre>
 
 <p>
-The call to <code>+</code> must be wrapped in a <code>lambda</code>.
+The call to <code>+</code> must be wrapped in a <code>lambda</code>. It works and it's not terrible
 </p>
-<div class="org-src-container">
-<pre class="src src-python">reduce(lambda x,y: x + y, [[1],[2],[3]])
+<pre class="example">
+# Example
+reduce(lambda x,y: x + y, [[1],[2],[3]])
 # =&gt; [1, 2, 3]
 </pre>
-</div>
 <p>
 This means that mapping an append operation starts to look like lambdas inside of lambdas and that smells to me like a breakdown of abstraction layers.
 </p>
+
+<p>
+In the end, a function that works with lists just feels right to me. It can be fed to <code>reduce</code> or its equivalent list comprehension. Having a meaningful name is useful.
+</p>
 <div class="org-src-container">
-<pre class="src src-python" id="org0b7aed5">def list_append(list_1, list_2):
+<pre class="src src-python" id="orgf643b0b">def list_append(list_1, list_2):
     return list_1 + list_2
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org1f7f637" class="outline-2">
-<h2 id="org1f7f637">General Problem Solver</h2>
-<div class="outline-text-2" id="text-org1f7f637">
+<div id="outline-container-org00aa6fb" class="outline-2">
+<h2 id="org00aa6fb">General Problem Solver</h2>
+<div class="outline-text-2" id="text-org00aa6fb">
 <p>
 The outline for this Python implementation follows the structure of my Common Lisp implementation&#x2026;for better or worse.
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org29a58db"># This file autogenerated from gps_py.org
+<pre class="src src-python" id="org53188fd"># gps.py
+# This file autogenerated from gps_py.org
 
 &lt;&lt;special-variables&gt;&gt;
 
@@ -520,21 +526,21 @@ The outline for this Python implementation follows the structure of my Common Li
 </pre>
 </div>
 </div>
-<div id="outline-container-org0d5bb9f" class="outline-3">
-<h3 id="org0d5bb9f">Special Variables</h3>
-<div class="outline-text-3" id="text-org0d5bb9f">
+<div id="outline-container-org39ae3e4" class="outline-3">
+<h3 id="org39ae3e4">Special Variables</h3>
+<div class="outline-text-3" id="text-org39ae3e4">
 <p>
 The global variables follow the convention used by the debugger.
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="orgdee2fa8">_ops_ = []
+<pre class="src src-python" id="orgcdc4c0a">_ops_ = []
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org2ec8926" class="outline-3">
-<h3 id="org2ec8926">Data Structure</h3>
-<div class="outline-text-3" id="text-org2ec8926">
+<div id="outline-container-orgc2f6882" class="outline-3">
+<h3 id="orgc2f6882">Data Structure</h3>
+<div class="outline-text-3" id="text-orgc2f6882">
 <p>
 An <code>op</code> has four fields. The Common Lisp implementation uses <code>defstruct</code>. There is not a clear equivalent data structure in Python. So here are a number of alternatives for representing the data structure. Dictionaries seemed like a reasonable alternative. But would require writing constructor functions to initialize the fields of dictionary objects. Named tuples seemed like another alternative and have the advantage of immutability. The probelm there is that using <code>my_tuple.replace(action</code>[spam, eggs])= when <code>my_tuple</code> is in a list of <code>namedtuple</code> requires pointer maintenance because Python lists are place based. Again there's book keeping.
 </p>
@@ -543,7 +549,7 @@ An <code>op</code> has four fields. The Common Lisp implementation uses <code>de
 So objects it is. 
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="orgb7ed204">class Op:
+<pre class="src src-python" id="org54294b7">class Op:
     def __init__(self, action=[], preconds=[], add_list=[], del_list=[]):
         self.action = action
         self.preconds = preconds
@@ -559,7 +565,7 @@ So objects it is.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: benrudgers</p>
-<p class="date">Created: 2017-02-17 Fri 14:25</p>
+<p class="date">Created: 2017-02-17 Fri 14:35</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
