@@ -95,6 +95,20 @@ So objects it is.
       """
       return x == ['start'] or executing_p(x)
 #+END_SRC
+*** convert-op
+The executing convention adds a sense of time transition to the world by handling actions such as =run_around_block= as a change to the world state. To implement the convention, every =op= has at least one executing form in =op.add_list=. The default executing form when no other executing form is present is =['executing', op.action]=. =convert-op= adds the default to an =op= if none is present.
+#+NAME: convert-op
+#+BEGIN_SRC python
+  def convert_op(op):
+      """
+      op -> NONE
+      Make op conform to the ['executing', op] convention.
+      """
+      add_list = op.add_list
+      some_executing = any(executing_p(item) for item in add_list)
+      if not some_executing: # aka unless 
+          op.add_list = cons(['executing', op.action], add_list)
+#+END_SRC
 *** executing_p
 #+NAME: executing-p
 #+BEGIN_SRC python
@@ -104,6 +118,26 @@ So objects it is.
       """
       return starts_with(x, 'executing')
 #+END_SRC
+*** find_all
+The version here is simpler than the version Norvig provides in that it does not have a wide range of options as is typical for Common Lisp functions.
+#+NAME: find-all
+#+BEGIN_SRC python
+  def find_all(a_list, test, not_test=False):
+      """
+      List -> List
+      Non-mutating.
+      Finds all the elements of a list that pass the test if not_test is False.
+      If not_test evaluates to True, returns all elements that do not pass the test.
+      """
+      if not_test:
+          return [element for element in a_list if not test(element)]
+      else:
+          return [element for element in a_list if test(element)]
+#+END_SRC
+*** mappend
+*** member_equal
+*** op
+*** remove_if_not
 *** starts_with
 #+NAME: starts_with
 #+BEGIN_SRC python
@@ -113,13 +147,7 @@ So objects it is.
       """
       return type(a_list) is list and first(a_list) == x
 #+END_SRC
-*** op
 *** use
-*** member_equal
-*** find_all
-*** find_all_if
-*** remove_if_not
-*** mappend
 * Knowledge Bases
 ** School Ops
 ** Monkey Ops
@@ -218,8 +246,11 @@ Where to start but with =cons=. It's not that Python doesn't have the ability to
 #+BEGIN_SRC python :session yes :results none
   def cons (element, a_list):
       """
-      Adds an elment to the *front* of a list.
+      Adds an elment to the *front* of a_list.
+      If a_list is not a list, cons creates a list of one element holding a_list.
       """
+      if not type(a_list) == list:
+          a_list = [a_list]
       a = [element]
       a.extend(a_list)
       return a
