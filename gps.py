@@ -31,8 +31,11 @@ def gps(state, goal, ops=_ops_):
 
 def cons (element, a_list):
     """
-    Adds an elment to the *front* of a list.
+    Adds an elment to the *front* of a_list.
+    If a_list is not a list, cons creates a list of one element holding a_list.
     """
+    if not type(a_list) == list:
+        a_list = [a_list]
     a = [element]
     a.extend(a_list)
     return a
