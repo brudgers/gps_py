@@ -80,8 +80,14 @@ So objects it is.
       """
       return find_all_if(action_p, achieve_all(cons ('start', state)), goals, [])
 #+END_SRC
+*** TODO verify find_all_if versus find_all
 ** Major Functions
 *** achieve_all
+#+NAME: achieve_all
+#+BEGIN_SRC python
+  def achieve_all(state, goals, goal_stack):
+      return [g for g in orderings(goals) if any achieve_each(state, g, goal_stack)]
+#+END_SRC
 *** achieve
 *** appropriate_p
 *** apply_op
