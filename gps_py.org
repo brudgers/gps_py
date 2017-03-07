@@ -88,6 +88,25 @@ So objects it is.
   def achieve_all(state, goals, goal_stack):
       return [g for g in orderings(goals) if any achieve_each(state, g, goal_stack)]
 #+END_SRC
+*** achieve_each
+The critical bit of code in =achieve_each= is to create a mutable copy of the global state. There are several ways to do this in Python, one way is to create a mutable object such as a =list=. Here a =class= is used instead.
+#+NAME: achieve_each
+#+BEGIN_SRC python
+  def achieve_each(state, goals, goal_stack):
+      """Achieve each goal and make sure that they all hold at the end"""
+      # the function will mutate state
+      # but don't mutate the current state
+      class Obj:
+          Obj.current_state = state
+      # achieve a goal using the local version of the state
+      # and update the local copy of state
+      def f(goal):
+          Obj.current_state = achieve(Obj.current_state, goal, goal_stack)
+      # make sure each goal is achievable on its own
+      # and that no goal clobbers another goal
+      if all(map(f, goals)) and set(goals) < set(Obj.current_state):
+          return Obj.current_state
+#+END_SRC
 *** achieve
 *** appropriate_p
 *** apply_op
