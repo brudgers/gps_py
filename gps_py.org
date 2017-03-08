@@ -91,7 +91,7 @@ So objects it is.
 *** achieve_each
 The critical bit of code in =achieve_each= is to create a mutable copy of the global state. There are several ways to do this in Python, one way is to create a mutable object such as a =list=. Here a =class= is used instead.
 #+NAME: achieve_each
-#+BEGIN_SRC python
+#+BEGIN_SRC python 
   def achieve_each(state, goals, goal_stack):
       """Achieve each goal and make sure that they all hold at the end"""
       # the function will mutate state
@@ -108,8 +108,48 @@ The critical bit of code in =achieve_each= is to create a mutable copy of the gl
           return Obj.current_state
 #+END_SRC
 *** achieve
+#+NAME: achieve
+#+BEGIN_SRC python
+  def achieve(state, goal, goal_stack):
+      """
+      A goal is achieved when it already holds
+      or if there is an appropriate op that
+      is applicable.
+      """
+      # make debugger available
+      debug_indent('gps', len(goal_stack), 'Goal: {}'.format(goal))
+
+      # local function keep line length down
+      def a_lambda(op):
+          return apply_op(state, goal, op, goal_stack)
+
+      # main logic
+      if goal in state:
+          return state
+      elif goal in goal_stack:
+          return False
+      else return any(op for op in map(a_lambda, appropriate_ops(goal, state)))
+#+END_SRC
 *** appropriate_p
 *** apply_op
+*** appropriate_ops
+The Common Lisp version of this function uses quite a bit of the language's built in list handling to do a lot in a little space.
+#+NAME: appropriate_ops
+#+BEGIN_SRC python :noweb tangle
+  def appropriate_ops(goal, state):
+      """
+      Return a list of appropriate operators
+      sorted by the number of unfilled preconditions.
+      """
+      <<appropriate-ops-key>>
+#+END_SRC
+One of the features the Lisp version uses is a =:key= for the sort command. It takes an op and counts how many of its preconditions are not met in the current state.
+#+NAME: appropriate-ops-key
+#+BEGIN_SRC python
+  def appropriate_ops_sort_key(op):
+      """A closure over the external value state"""
+      return len([p for p in op.preconds if p not in state])
+#+END_SRC
 ** Auxilary Functions
 *** action_p
 #+NAME: action-p
